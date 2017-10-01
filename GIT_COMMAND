@@ -1,0 +1,107 @@
+http://www.cnblogs.com/Chenshuai7/p/5486278.html
+  git init //把这个目录变成Git可以管理的仓库
+　　git add README.md //文件添加到仓库
+　　git add . //不但可以跟单一文件，还可以跟通配符，更可以跟目录。一个点就把当前目录下所有未追踪的文件全部add了 
+　　git commit -m "first commit" //把文件提交到仓库
+
+
+//查看信息
+  git status       //查看文件修改状态
+  git diff		//查看具体修改内容
+  git log		//查看每次commit信息  
+  git reflog			//查看每次的版本号  （包括已撤销的）
+//撤销修改
+  git reset --hard HEAD^	//回退之前版本   HEAD表示当前版本   上一个：HEAD^  上两个:HEAD^^...
+				//上100个  HEAD~100
+  git reset --hard 0e619b284f6da79dece40421d885f146ce1ce30a   //回退已经撤销的版本  
+  git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
+
+	一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+
+	一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+	 git reset HEAD readme.txt
+//删除文件
+  rm  file
+  git add/rm <文件>...    +git  commit -m “”//确认删除
+  git checkout -- <文件>   //回复删除文件
+//远程仓库
+  ssh-keygen -t rsa -C "wuzbingchen@gmail.com"//生成ssh密钥 ，将public ssh添加进github帐号
+  git remote add origin git@github.com:code-cultivater/Git_Test.git   //关联远程仓库
+//提交远程仓库
+  git push -u origin +master  //第一次本地master提交远程origin
+  git push origin master      //之后的push
+//克隆远程仓库
+  git clone git@github.com:code-cultivater/Python-.com
+//分支
+  git branch  //查看所有分支
+  git banch dev //创建dev分支
+  
+  git checkout dev  //切换dev分支
+
+  git checkout -b dev  //创建并切换到dev
+
+  git checkout master  //切换回主分支
+
+  git merge dev   //先切换回主分支，再dev合并到master
+  
+  git merge --no-ff -m "merge with no-ff" dev   //合并dev到主分支，仍然保留dev存在
+  
+  git branch -d dev  //删除已经合并的分支
+ 
+  git log --graph   //查看分支合并信息
+
+  git stash //暂存没有commit的信息
+
+  git stash list //查看stash的列表
+  
+  git stash apply stash@{0}  //恢复第几个stash   或者  git stash pop
+
+  git remote  [-v]//查看远程信息
+
+  因此，多人协作的工作模式通常是这样：
+
+	首先，可以试图用git push origin branch-name推送自己的修改；
+
+	如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+
+	如果合并有冲突，则解决冲突，并在本地提交；
+
+	没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！
+
+	如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令	git branch --set-upstream branch-name origin/branch-name。
+
+	这就是多人协作的工作模式，一旦熟悉了，就非常简单。
+  git pull 从远程抓取分支
+
+
+
+  
+//标签
+  命令git tag <name>用于新建一个标签，默认为HEAD，也可以指定一个commit id；
+
+  git tag -a <tagname> -m "blablabla..."可以指定标签信息；
+
+  git tag -s <tagname> -m "blablabla..."可以用PGP签名标签；
+
+  命令git tag可以查看所有标签。  
+
+  命令git push origin <tagname>可以推送一个本地标签；
+
+  命令git push origin --tags可以推送全部未推送过的本地标签；
+
+  命令git tag -d <tagname>可以删除一个本地标签；
+
+  命令git push origin :refs/tags/<tagname>可以删除一个远程标签,删除远程标签前先删除本地标签
+
+ 
+
+
+
+
+  
+
+
+
+　　git remote add origin git@github.com:wangjiax9/practice.git //关联远程仓库
+　　git push -u origin master //把本地库的所有内容推送到远程库上
+
